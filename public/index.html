@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFA Portal | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            SFA <span>PORTAL</span>
+        </div>
+        <div class="header-text">
+            Sindh Food Authority
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Business Licensing & Safety Audit Management System</p>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <h3>Total Businesses</h3>
+                <p id="businessCount">Loading...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>License Applications</h3>
+                <p id="applicationCount">Loading...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Inspections</h3>
+                <p id="inspectionCount">Loading...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Violations</h3>
+                <p id="violationCount">Loading...</p>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <h2>Search Businesses</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by business name or category...">
+                <button id="searchButton">Search</button>
+            </div>
+            <div id="searchResults"></div>
+        </section>
+
+
+        <section class="analytics-section">
+            <h2>Data Analytics & Reports</h2>
+
+            <div class="analytics-grid">
+
+                <div class="analytics-card">
+                    <h3>Businesses by Category</h3>
+                    <div id="categoryChart">Loading...</div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Applications by Status</h3>
+                    <div id="applicationChart">Loading...</div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Average Inspection Scores</h3>
+                    <div id="inspectionChart">Loading...</div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Violations Analysis</h3>
+                    <div id="violationChart">Loading...</div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Businesses with Most Violations</h3>
+                    <div id="businessViolationChart">Loading...</div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="data-section">
+            <h2>Registered Businesses</h2>
+            <div id="businessList">Loading businesses...</div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Sindh Food Authority Portal</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
