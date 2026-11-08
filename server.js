@@ -19,45 +19,59 @@ app.use(express.static('public'));
 
 const client = new MongoClient(process.env.MONGO_URI);
 
-async function startServer() {
-    try {
-        await client.connect();
+let initializationPromise;
 
-        const db = client.db('sfa_portal');
+async function initializeApp() {
+    if (!initializationPromise) {
+        initializationPromise = (async () => {
+            await client.connect();
 
-        await db.command({ ping: 1 });
+            const db = client.db('sfa_portal');
 
-        console.log('Connected to MongoDB Atlas successfully!');
+            await db.command({ ping: 1 });
 
-        app.get('/', (req, res) => {
-            res.send('SFA Portal Backend is Running!');
-        });
+            console.log('Connected to MongoDB Atlas successfully!');
 
-        // Business CRUD Routes
-        app.use('/api/businesses', businessRoutes(db));
-        // User CRUD Routes
-        app.use('/api/users', userRoutes(db));
-        // License Application CRUD Routes
-        app.use('/api/license-applications', licenseApplicationRoutes(db));
-        // Inspection CRUD Routes
-        app.use('/api/inspections', inspectionRoutes(db));
-        // Violation CRUD Routes
-        app.use('/api/violations', violationRoutes(db));
-        // Aggregation Pipeline Routes
-        app.use('/api/aggregations', aggregationRoutes(db));
-        // Search Routes
-        app.use('/api/search', searchRoutes(db));
+            app.get('/', (req, res) => {
+                res.send('SFA Portal Backend is Running!');
+            });
 
-        const PORT = process.env.PORT || 5000;
-
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-
-    } catch (error) {
-        console.error('MongoDB connection failed:', error.message);
-        process.exit(1);
+            app.use('/api/businesses', businessRoutes(db));
+            app.use('/api/users', userRoutes(db));
+            app.use('/api/license-applications', licenseApplicationRoutes(db));
+            app.use('/api/inspections', inspectionRoutes(db));
+            app.use('/api/violations', violationRoutes(db));
+            app.use('/api/aggregations', aggregationRoutes(db));
+            app.use('/api/search', searchRoutes(db));
+        })();
     }
+
+    return initializationPromise;
 }
 
-startServer();
+// Local development
+if (require.main === module) {
+    initializeApp()
+        .then(() => {
+            const PORT = process.env.PORT || 5000;
+
+            app.listen(PORT, () => {
+                console.log(`Server running on port ${PORT}`);
+            });
+        })
+        .catch((error) => {
+            console.error('MongoDB connection failed:', error);
+            process.exit(1);
+        });
+}
+
+// Vercel serverless function
+module.exports = async (req, res) => {
+    try {
+        await initializeApp();
+        return app(req, res);
+    } catch (error) {
+        console.error('Application initialization failed:', error);
+        return res.status(500).send('SFA Portal server initialization failed.');
+    }
+};
