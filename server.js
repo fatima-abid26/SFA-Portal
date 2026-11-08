@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const { MongoClient } = require('mongodb');
 
+const path = require('path');
 const businessRoutes = require('./routes/businessRoutes');
 const userRoutes = require('./routes/userRoutes');
 const licenseApplicationRoutes = require('./routes/licenseApplicationRoutes');
@@ -33,7 +34,7 @@ async function initializeApp() {
             console.log('Connected to MongoDB Atlas successfully!');
 
             app.get('/', (req, res) => {
-                res.send('SFA Portal Backend is Running!');
+                res.sendFile(path.join(__dirname, 'public', 'index.html'));
             });
 
             app.use('/api/businesses', businessRoutes(db));
