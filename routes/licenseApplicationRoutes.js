@@ -107,6 +107,12 @@ module.exports = (db) => {
                     });
                 }
 
+                if (reviewerExists.role !== 'admin') {
+                    return res.status(400).json({
+                        message: 'Only an admin can review license applications'
+                    });
+                }
+
                 reviewerId = new ObjectId(reviewedBy);
             }
 
@@ -199,6 +205,12 @@ module.exports = (db) => {
                     if (!reviewerExists) {
                         return res.status(404).json({
                             message: 'Reviewer not found'
+                        });
+                    }
+
+                    if (reviewerExists.role !== 'admin') {
+                        return res.status(400).json({
+                            message: 'Only an admin can review license applications'
                         });
                     }
 

@@ -59,6 +59,12 @@ module.exports = (db) => {
                 });
             }
 
+            if (typeof type !== 'string' || !type.trim()) {
+                return res.status(400).json({
+                    message: 'Violation type cannot be empty'
+                });
+            }
+
             if (!ObjectId.isValid(businessId) || !ObjectId.isValid(inspectionId)) {
                 return res.status(400).json({
                     message: 'Invalid business ID or inspection ID'
@@ -106,7 +112,7 @@ module.exports = (db) => {
             const newViolation = {
                 businessId: new ObjectId(businessId),
                 inspectionId: new ObjectId(inspectionId),
-                type,
+                type: type.trim(),
                 severity,
                 status
             };

@@ -42,7 +42,20 @@ module.exports = (db) => {
     // POST: Create a new business
     router.post('/', async (req, res) => {
         try {
-            const result = await businesses.insertOne(req.body);
+            const { ObjectId } = require('mongodb');
+
+            if (!ObjectId.isValid(req.body.ownerId)) {
+                return res.status(400).json({
+                    message: 'Invalid business owner ID'
+                });
+            }
+
+            const businessData = {
+                ...req.body,
+                ownerId: new ObjectId(req.body.ownerId)
+            };
+
+            const result = await businesses.insertOne(businessData);
 
             res.status(201).json({
                 message: 'Business created successfully',
@@ -59,10 +72,22 @@ module.exports = (db) => {
             const { ObjectId } = require('mongodb');
 
             if (!ObjectId.isValid(req.params.id)) {
-                return res.status(400).json({ message: 'Invalid business ID' });
+                return res.status(400).json({
+                    message: 'Invalid business ID'
+                });
             }
 
             const { _id, ...updateData } = req.body;
+
+            if (updateData.ownerId) {
+                if (!ObjectId.isValid(updateData.ownerId)) {
+                    return res.status(400).json({
+                        message: 'Invalid business owner ID'
+                    });
+                }
+
+                updateData.ownerId = new ObjectId(updateData.ownerId);
+            }
 
             const result = await businesses.updateOne(
                 { _id: new ObjectId(req.params.id) },
@@ -70,7 +95,9 @@ module.exports = (db) => {
             );
 
             if (result.matchedCount === 0) {
-                return res.status(404).json({ message: 'Business not found' });
+                return res.status(404).json({
+                    message: 'Business not found'
+                });
             }
 
             res.status(200).json({

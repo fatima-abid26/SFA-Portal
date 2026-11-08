@@ -1,111 +1,364 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFA Portal | Dashboard</title>
+    <title>SFA Portal | Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="logo">
-            SFA <span>PORTAL</span>
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>SFA <span>PORTAL</span></h2>
+                <p>Sindh Food Authority</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <p class="nav-heading">MAIN MENU</p>
+
+                <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#businesses" class="nav-link" data-page="businesses">
+                    <span>▣</span> Businesses
+                </a>
+
+                <a href="#applications" class="nav-link" data-page="applications">
+                    <span>▤</span> License Applications
+                </a>
+
+                <a href="#inspections" class="nav-link" data-page="inspections">
+                    <span>◉</span> Inspections
+                </a>
+
+                <a href="#violations" class="nav-link" data-page="violations">
+                    <span>⚑</span> Violations
+                </a>
+
+                <a href="#users" class="nav-link" data-page="users">
+                    <span>♙</span> Users
+                </a>
+
+                <p class="nav-heading">REPORTS</p>
+
+                <a href="#analytics" class="nav-link" data-page="analytics">
+                    <span>▥</span> Analytics
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>© 2026 SFA Portal</p>
+                <small>Administration System</small>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-area">
+
+            <header class="topbar">
+                <div>
+                    <h2>Business Licensing & Safety Audit</h2>
+                    <p>Management Portal</p>
+                </div>
+                <div class="admin-label">
+                    <span class="admin-dot"></span>
+                    Administrator
+                </div>
+            </header>
+
+            <main class="content">
+
+                <!-- Dashboard Page -->
+                <section class="page active" id="dashboard">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>Dashboard Overview</h1>
+                            <p>Welcome to the Sindh Food Authority Management Portal.</p>
+                        </div>
+                    </div>
+
+                    <section class="stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">▣</div>
+                            <h3>Total Businesses</h3>
+                            <p id="businessCount">Loading...</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">▤</div>
+                            <h3>License Applications</h3>
+                            <p id="applicationCount">Loading...</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">◉</div>
+                            <h3>Total Inspections</h3>
+                            <p id="inspectionCount">Loading...</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">⚑</div>
+                            <h3>Total Violations</h3>
+                            <p id="violationCount">Loading...</p>
+                        </div>
+                    </section>
+
+                    <section class="data-section">
+                        <div class="section-heading">
+                            <div>
+                                <h2>Registered Businesses</h2>
+                                <p>Overview of businesses registered in the system.</p>
+                            </div>
+                            <button class="secondary-button" data-page-link="businesses">
+                                View All Businesses
+                            </button>
+                        </div>
+
+                        <div id="businessList">Loading businesses...</div>
+                    </section>
+
+                </section>
+
+                <!-- Businesses Page -->
+                <section class="page" id="businesses">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>Business Management</h1>
+                            <p>View, register, update and manage business records.</p>
+                        </div>
+                        <button class="primary-button" data-add="businesses">
+                            + Add Business
+                        </button>
+                    </div>
+
+                    <div class="management-card">
+                        <div class="search-box">
+                            <input type="text" id="searchInput"
+                                placeholder="Search by business name or category...">
+                            <button id="searchButton">Search</button>
+                        </div>
+
+                        <div id="searchResults"></div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Business Name</th>
+                                        <th>Category</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="businessTableBody">
+                                    <tr><td colspan="5">Loading businesses...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- License Applications Page -->
+                <section class="page" id="applications">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>License Applications</h1>
+                            <p>Manage and review business license applications.</p>
+                        </div>
+                        <button class="primary-button" data-add="applications">
+                            + Add Application
+                        </button>
+                    </div>
+
+                    <div class="management-card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Business</th>
+                                        <th>Application Date</th>
+                                        <th>Status</th>
+                                        <th>Reviewed By</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="applicationTableBody">
+                                    <tr><td colspan="5">Loading applications...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Inspections Page -->
+                <section class="page" id="inspections">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>Inspection Management</h1>
+                            <p>Monitor food safety inspections and their results.</p>
+                        </div>
+                        <button class="primary-button" data-add="inspections">
+                            + Add Inspection
+                        </button>
+                    </div>
+
+                    <div class="management-card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Business</th>
+                                        <th>Inspector</th>
+                                        <th>Inspection Date</th>
+                                        <th>Score</th>
+                                        <th>Result</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inspectionTableBody">
+                                    <tr><td colspan="6">Loading inspections...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Violations Page -->
+                <section class="page" id="violations">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>Violation Management</h1>
+                            <p>Track food safety violations and resolution status.</p>
+                        </div>
+                        <button class="primary-button" data-add="violations">
+                            + Add Violation
+                        </button>
+                    </div>
+
+                    <div class="management-card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Business</th>
+                                        <th>Inspection</th>
+                                        <th>Violation Type</th>
+                                        <th>Severity</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="violationTableBody">
+                                    <tr><td colspan="6">Loading violations...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Users Page -->
+                <section class="page" id="users">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>User Management</h1>
+                            <p>Manage administrators, inspectors and business owners.</p>
+                        </div>
+                        <button class="primary-button" data-add="users">
+                            + Add User
+                        </button>
+                    </div>
+
+                    <div class="management-card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Phone</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody">
+                                    <tr><td colspan="5">Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Analytics Page -->
+                <section class="page" id="analytics">
+
+                    <div class="page-heading">
+                        <div>
+                            <h1>Data Analytics & Reports</h1>
+                            <p>Insights generated from the SFA database using MongoDB aggregation pipelines.</p>
+                        </div>
+                    </div>
+
+                    <div class="analytics-grid">
+
+                        <div class="analytics-card">
+                            <h3>Businesses by Category</h3>
+                            <div id="categoryChart">Loading...</div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>Applications by Status</h3>
+                            <div id="applicationChart">Loading...</div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>Average Inspection Scores</h3>
+                            <div id="inspectionChart">Loading...</div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>Violations Analysis</h3>
+                            <div id="violationChart">Loading...</div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <h3>Businesses with Most Violations</h3>
+                            <div id="businessViolationChart">Loading...</div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- Form Area -->
+                <div id="modalContainer"></div>
+
+            </main>
+
         </div>
-        <div class="header-text">
-            Sindh Food Authority
-        </div>
-    </header>
 
-    <main class="container">
-
-        <section class="welcome">
-            <div>
-                <h1>Dashboard</h1>
-                <p>Business Licensing & Safety Audit Management System</p>
-            </div>
-        </section>
-
-        <section class="stats">
-            <div class="stat-card">
-                <h3>Total Businesses</h3>
-                <p id="businessCount">Loading...</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>License Applications</h3>
-                <p id="applicationCount">Loading...</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Inspections</h3>
-                <p id="inspectionCount">Loading...</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>Total Violations</h3>
-                <p id="violationCount">Loading...</p>
-            </div>
-        </section>
-
-        <section class="search-section">
-            <h2>Search Businesses</h2>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search by business name or category...">
-                <button id="searchButton">Search</button>
-            </div>
-            <div id="searchResults"></div>
-        </section>
-
-
-        <section class="analytics-section">
-            <h2>Data Analytics & Reports</h2>
-
-            <div class="analytics-grid">
-
-                <div class="analytics-card">
-                    <h3>Businesses by Category</h3>
-                    <div id="categoryChart">Loading...</div>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Applications by Status</h3>
-                    <div id="applicationChart">Loading...</div>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Average Inspection Scores</h3>
-                    <div id="inspectionChart">Loading...</div>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Violations Analysis</h3>
-                    <div id="violationChart">Loading...</div>
-                </div>
-
-                <div class="analytics-card">
-                    <h3>Businesses with Most Violations</h3>
-                    <div id="businessViolationChart">Loading...</div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <section class="data-section">
-            <h2>Registered Businesses</h2>
-            <div id="businessList">Loading businesses...</div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>© 2026 Sindh Food Authority Portal</p>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
-</body>
 
+</body>
 </html>

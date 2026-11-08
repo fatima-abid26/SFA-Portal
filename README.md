@@ -35,6 +35,8 @@ The database contains five collections:
 
 The collections are connected through MongoDB ObjectId references.
 
+The project demonstrates both embedding and referencing: business address details are embedded within business documents, while relationships between users, businesses, applications, inspections, and violations are maintained using ObjectId references.
+
 See [schema.md](schema.md) for detailed collection structures, fields, relationships, and the database relationship diagram.
 
 ## Main Features
@@ -173,7 +175,7 @@ MONGO_URI=your_mongodb_atlas_connection_string
 ### 4. Start the Server
 
 ```bash
-node server.js
+npm start
 ```
 
 The application runs locally at:
@@ -195,6 +197,38 @@ Testing includes:
 - Valid and invalid document insertion using JSON Schema Validation.
 - Business Text Search using different search terms.
 - Frontend dashboard statistics and business search.
+
+## Project Screenshots
+
+### Database Collections
+![Database Collections](Project%20Screenshots/01_Database_Collections.png)
+
+### CRUD Operations
+![Business CRUD](Project%20Screenshots/18_CRUD_Read_Businesses.png)
+![Create Business](Project%20Screenshots/19_CRUD_Create_Business.png)
+![Update Business](Project%20Screenshots/21_CRUD_Update_Business.png)
+
+### Aggregation Pipelines
+![Businesses by Category](Project%20Screenshots/26_Aggregation_Businesses_By_Category.png)
+![Applications by Status](Project%20Screenshots/27_Aggregation_Applications_By_Status.png)
+![Average Inspection Score](Project%20Screenshots/28_Aggregation_Average_Inspection_Score.png)
+![Violations Analysis](Project%20Screenshots/29_Aggregation_Violations_Analysis.png)
+![Businesses with Most Violations](Project%20Screenshots/30_Aggregation_Businesses_Most_Violations.png)
+
+### Indexing and Validation
+![JSON Schema Validation](Project%20Screenshots/31_JSON_Schema_Validation_Test.png)
+![Indexing Before](Project%20Screenshots/32_Indexing_before.png)
+![Indexing After](Project%20Screenshots/33_Indexing_after.png)
+
+### Text Search
+![Search Sindh](Project%20Screenshots/34_Text_Search_Sindh.png)
+![Search Bakery](Project%20Screenshots/35_Text_Search_Bakery.png)
+
+### Frontend Dashboard
+![Dashboard Overview](Project%20Screenshots/37_Dashboard_Overview.png)
+![Dashboard Business Records](Project%20Screenshots/38_Dashboard_Business_Records.png)
+![Dashboard Analytics](Project%20Screenshots/39_Dashboard_Analytics_1.png)
+![Dashboard Analytics](Project%20Screenshots/40_Dashboard_Analytics_2.png)
 
 ## Project Documentation
 

@@ -17,6 +17,14 @@ async function testIndexing() {
             businessId: new ObjectId('6ae8eae71f3d557a9da51ed8')
         };
 
+        // Remove existing index to ensure a fair before-and-after test
+        const existingIndexes = await inspections.indexes();
+
+        if (existingIndexes.some(index => index.name === 'businessId_1')) {
+            await inspections.dropIndex('businessId_1');
+            console.log('Existing index removed successfully!');
+        }
+
         // BEFORE INDEXING
         console.log('\n--- BEFORE INDEXING ---');
 
